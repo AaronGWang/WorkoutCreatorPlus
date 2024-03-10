@@ -1,0 +1,13 @@
+﻿Index,Name,Area,Weight,Rep_num,RIR,Instructions
+1,Dumbbell Curl,Bicep,1,1,1,"Hold dumbbells in each hand with palms facing forward, curl the weights up towards your shoulders while keeping your elbows close to your sides."
+2,Hammer Curl,Bicep,1,1,1,"Hold dumbbells in each hand with a neutral grip (palms facing your body), curl the weights up towards your shoulders while keeping your elbows close to your sides."
+3,Preacher Curl,Bicep,0,2,0,"Sit on a preacher curl bench, place your upper arms against the angled pad, hold a barbell or dumbbell with an underhand grip, and curl the weight up towards your shoulders."
+4,Single Arm Cable Curl,Bicep,1,1,1,"Stand facing a cable machine, grasp a handle with one hand, and curl the handle towards your shoulder while keeping your upper arm stationary."
+5,Seated Dumbbell Curl,Bicep,1,1,1,"Sit on a bench at a slight incline, hold dumbbells in each hand with palms facing forward, and curl the weights up towards your shoulders while keeping your elbows close to your sides."
+6,Seated Hammer Curl,Bicep,1,1,1,"Sit on a bench at a slight incline, hold dumbbells in each hand with a neutral grip (palms facing your body), and curl the weights up towards your shoulders while keeping your elbows close to your sides."
+7,Close Grip Bench Press,Tricep,1,1,0,"Lie on a bench and grip the barbell with hands closer together than shoulder-width apart, lower the barbell to your chest, and then press it back up, focusing on engaging your triceps."
+8,Single Arm Cable Extension,Tricep,1,1,0,"Stand facing the cable machine, vertically extend your arm with the cable in hand. Alternatively, stand facing away the cable with a slight lounge, extend your arm with the cable in hand over your head and away from the machine."
+9,Cable Pushdown,Tricep,1,1,1,"Attach a rope or straight bar to a cable machine, stand facing the machine, grip the attachment with an overhand grip, and push the attachment down while keeping your upper arms stationary."
+10,Overhead Tricep Dip,Tricep,2,1,0,"Lift a dumbbell over head, slowly extend it over and below your head, and lift it up again."
+11,Diamond Pushups,Tricep,0,2,0,"Assume a push-up position, but place your hands close together, forming a diamond shape with your thumbs and index fingers, lower your body by bending your elbows, and then push back up to the starting position."
+12,Weighted Seated Dips,Tricep,1,2,0,"Sit on a bench or chair, grasp the edge with your hands, lower your body by bending your elbows, and then push back up to the starting position while holding a plate on your lap."

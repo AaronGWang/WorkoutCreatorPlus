@@ -1,0 +1,12 @@
+﻿Index,Name,Area,Weight,Rep_num,RIR,Instructions
+1,Dips,Upper,0,1,0,"Elevate yourself on two grips and keep the back from arching as you dip the body down, and proceed to lift back up."
+2,Clean and Jerk,Upper,1,2,0,"Start with the barbell at the hips, swiftly lift it to your shoulders with a half-circle motion, squating during this process, and stand upright as you return the bar back to the hips."
+3,Pullup and Slow Return,Upper,0,1,0,"Like normal pullups, but lift yourself up fast, hold for a second, and return to the langing position slowly"
+4,Side-to-Side Pushups,Upper,0,1,0,"Like normal pushups, but shift your upper body to one side every time you press down, and return to the middle on the way up."
+5,Ball Lift and Throw,Upper,1,1,0,Lift a ball with the biceps and follow through when throwing it down into the ground.
+6,Landmine Press,Upper,1,1,0,Wedge a barbell in the corner of the room and use one arm to push the other end up and down. 
+7,Weighted Squat Jumps,Lower,1,2,0,Place a weight on your back and perform a squat followed instantly by a jump.
+8,Knee to Box Jumps,Lower,0,1,0,"Start on your knees in front of a box, first jump to your feet on the ground, and perform a box jump swiftly after."
+9,Balance Squat and Ball Toss,Lower,1,1,0,"Perform a squat on a half yoga ball, but catch a medacine ball when you are standing upright, and follow through as you squat down."
+10,Balance Squat and Plate Spin,Lower,1,1,0,"As you squat down, spin a plate slowly around your head, make sure to control both the squating movement and spinning movement."
+11,Single-leg Box Jumps,Lower,0,2,0,"Perform a box jump but with only one leg, it can begin with a small single leg squat."
