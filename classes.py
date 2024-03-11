@@ -1,5 +1,5 @@
 import pandas as pd
-
+import random
 class main_set_split():
   '''
   This class creates the main set based on a type of split. 
@@ -26,7 +26,10 @@ class main_set_split():
     '''
     This method creates the first set of the workout. 
     '''
-    area_1_df = pd.read_csv(f'{self.area_1}.csv')
-    area_2_df = pd.read_csv(f'{self.area_2}.csv')
+    area_1_df = pd.read_csv(f'Exercises/{self.area_1}.csv')
+    area_2_df = pd.read_csv(f'Exercises/{self.area_2}.csv')
+
+    ridx_1 = random.sample(len(area_1_df), k=3)
+    print(area_1_df[ridx_1])
 
     

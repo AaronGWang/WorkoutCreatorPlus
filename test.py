@@ -1,14 +1,30 @@
 import pandas as pd
+import random
 
-df = pd.read_csv('Legs.csv')
+'''
+Upper split day
 
-grouped = df.groupby('Area')
+1. bicep
+2. back
+3. tricep
+3. shoulder
+4. chest
+5. compound
 
-dataframes = {}
-for area, group in grouped:
-    dataframes['Area'] = group.copy()
+Lower split day
 
-for area, dataframe in dataframes.items():
-    print(f"Dataframe for area '{area}':")
-    print(dataframe)
-    print()
+1. quad
+2. calf
+3. glute
+4. hamstring
+5. compound
+
+Core split
+
+1. lv 1 
+2. lv 2
+3. lv 1
+4. lv 2
+(2 abs, 1 obliques, 1 lower back)
+
+'''
