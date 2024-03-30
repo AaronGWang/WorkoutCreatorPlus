@@ -34,13 +34,12 @@ def choose_exercise(area_df: pd.DataFrame, area_df_list: list):
   Returns:
     exercises (list): A list of exercises for the area (each has "Index", "Name", "Area", "Weight", "Rep_num", "RIR", and "Instructions").
   '''
-  n = random.choice(range(1000))
-  random.seed(n)
+  random_seed = random.randint(1, 1000)
 
   exercises = []
 
   for i in range(len(area_df_list)):
-    exercise = area_df.loc[area_df['Area'] == area_df_list[i]['Area'].values[0]].sample(n=1)
+    exercise = area_df.loc[area_df['Area'] == area_df_list[i]['Area'].values[0]].sample(n=1, random_state=random_seed)
     exercises.append(exercise)
 
   return exercises
@@ -58,7 +57,7 @@ def generate_upper_split(area_1_dataframe: pd.DataFrame,
     compound_dataframe (pd.DataFrame): A dataframe for the compound exercises.
 
   Returns:
-    upper_split (list): A list of ordered upper body exercises in this order: [Biceps, Shoulders, Triceps, Back, Compound].
+    upper_split (list): A list of ordered upper body exercises in this order: [Biceps, Triceps, Shoulders, Back, Chest, Compound].
   '''
 
   upper_split = []
@@ -73,11 +72,9 @@ def generate_upper_split(area_1_dataframe: pd.DataFrame,
                                               area_df_list=push_pull_dataframe_list)
 
   compound_exercise = compound_dataframe.loc[compound_dataframe['Area'] == 'Upper'].sample(n=1)
-
   compound_exercise['Area'] = 'Compound'
 
-  for arm, push_pull in zip(arm_exercises, push_pull_exercises):
-      upper_split.extend([arm, push_pull])
+  upper_split = arm_exercises + push_pull_exercises
 
   upper_split.append(compound_exercise)
 
@@ -122,9 +119,7 @@ def generate_core_split(core_dataframe: pd.DataFrame):
   Returns:
     core_split (list): A list of ordered core exercises in this order: [Abs, Obliques, Abs, LB & Balance], intensity alternates between exercises.
   '''
-  n = random.choice(range(1000))
-  random.seed(n)
-  
+
   core_split = []
 
   intensity_values = list(core_dataframe['Intensity'].unique())
@@ -136,16 +131,24 @@ def generate_core_split(core_dataframe: pd.DataFrame):
   if exercise_1['Intensity'].item() == 1:
     exercise_2 = core_dataframe.loc[(core_dataframe['Area'] == area_values[1]) & (core_dataframe['Intensity'] == 2)].sample(n=1)
     core_split.append(exercise_2)
-    exercise_3 = core_dataframe.loc[(core_dataframe['Area'] == area_values[0]) & (core_dataframe['Intensity'] == 1)].sample(n=1)
+
+    filtered_df = core_dataframe[core_dataframe['Name'] != exercise_1['Name'].item()]
+
+    exercise_3 = filtered_df.loc[(core_dataframe['Area'] == area_values[0]) & (core_dataframe['Intensity'] == 1)].sample(n=1)
     core_split.append(exercise_3)
+
     exercise_4 = core_dataframe.loc[(core_dataframe['Area'] == area_values[2]) & (core_dataframe['Intensity'] == 2)].sample(n=1)
     core_split.append(exercise_4)
 
   else:
     exercise_2 = core_dataframe.loc[(core_dataframe['Area'] == area_values[1]) & (core_dataframe['Intensity'] == 1)].sample(n=1)
     core_split.append(exercise_2)
-    exercise_3 = core_dataframe.loc[(core_dataframe['Area'] == area_values[0]) & (core_dataframe['Intensity'] == 2)].sample(n=1)
+
+    filtered_df = core_dataframe[core_dataframe['Name'] != exercise_1['Name'].item()]
+
+    exercise_3 = filtered_df.loc[(core_dataframe['Area'] == area_values[0]) & (core_dataframe['Intensity'] == 2)].sample(n=1)
     core_split.append(exercise_3)
+
     exercise_4 = core_dataframe.loc[(core_dataframe['Area'] == area_values[2]) & (core_dataframe['Intensity'] == 1)].sample(n=1)
     core_split.append(exercise_4)
   
