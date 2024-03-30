@@ -34,6 +34,9 @@ def choose_exercise(area_df: pd.DataFrame, area_df_list: list):
   Returns:
     exercises (list): A list of exercises for the area (each has "Index", "Name", "Area", "Weight", "Rep_num", "RIR", and "Instructions").
   '''
+  n = random.choice(range(1000))
+  random.seed(n)
+
   exercises = []
 
   for i in range(len(area_df_list)):
@@ -71,6 +74,8 @@ def generate_upper_split(area_1_dataframe: pd.DataFrame,
 
   compound_exercise = compound_dataframe.loc[compound_dataframe['Area'] == 'Upper'].sample(n=1)
 
+  compound_exercise['Area'] = 'Compound'
+
   for arm, push_pull in zip(arm_exercises, push_pull_exercises):
       upper_split.extend([arm, push_pull])
 
@@ -99,6 +104,8 @@ def generate_lower_split(area_3_dataframe: pd.DataFrame, compound_dataframe: pd.
 
   compound_exercise = compound_dataframe.loc[compound_dataframe['Area'] == 'Lower'].sample(n=1)
 
+  compound_exercise['Area'] = 'Compound'
+
   lower_split = leg_exercises.copy()
   lower_split.append(compound_exercise)
 
@@ -115,6 +122,9 @@ def generate_core_split(core_dataframe: pd.DataFrame):
   Returns:
     core_split (list): A list of ordered core exercises in this order: [Abs, Obliques, Abs, LB & Balance], intensity alternates between exercises.
   '''
+  n = random.choice(range(1000))
+  random.seed(n)
+  
   core_split = []
 
   intensity_values = list(core_dataframe['Intensity'].unique())
@@ -140,3 +150,102 @@ def generate_core_split(core_dataframe: pd.DataFrame):
     core_split.append(exercise_4)
   
   return core_split
+
+
+def generate_main_set_focus(upper_data: pd.DataFrame):
+  '''
+  This function generates the focus of the workout based on the upper body data.
+
+  Args:
+    upper_data (pd.DataFrame): The upper body data, including weight, rep_num & RIR
+
+  Returns:
+    focus (str): The focus of the workout.
+  '''
+  if upper_data['Weight'].item() == 0:
+    weight = 'low weight'
+  elif upper_data['Weight'].item() == 1:
+    weight = 'medium weight'
+  else:
+    weight = 'heavy weight'
+
+  if upper_data['Rep_num'].item() == 0:
+    rep_num = 'low reps'
+  elif upper_data['Rep_num'].item() == 1:
+    rep_num = 'medium reps'
+  else:
+    rep_num = 'high reps'
+
+  if upper_data['RIR'].item() == 0:
+    RIR = 'with no reps in reserve'
+  else:
+    RIR = 'with reps in reserve'
+
+  return f"Focus on {weight} for {rep_num}, {RIR}"
+
+
+def print_main_set(data: list):
+  '''
+  This function prints the set based on the data.
+
+  Args:
+    data (list): The data to be printed.
+
+  Returns:
+    workout (str): organized lines of text about every exercise.
+  '''
+  string = str('---------\n\n')
+
+  for i in range(len(data)):
+    line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_main_set_focus(data[i])}")
+    string += line + '\n' + '\n'
+
+  string += str('---------')
+
+  return string
+
+
+def generate_core_focus(core_data: pd.DataFrame):
+  '''
+  This function generates the focus of the workout based on the core data.
+
+  Args:
+    core_data (pd.DataFrame): The core data, including weight, rep_num & RIR
+
+  Returns:
+    focus (str): The focus of the workout.
+  '''
+  if core_data['Weight'].item() == 0:
+    weight = 'low weight'
+  elif core_data['Weight'].item() == 1:
+    weight = 'medium weight'
+  else:
+    weight = 'heavy weight'
+
+  if core_data['Intensity'].item() == 1:
+    intensity = 'low-intensity'
+  else:
+    intensity = 'high-intensity'
+
+  return f"This is a {intensity} exercise. Focus on {weight}"
+
+
+def print_core_set(data: list):
+  '''
+  This function prints the core set based on the data.
+
+  Args:
+    data (list): The data to be printed.
+
+  Returns:
+    workout (str): organized lines of text about every exercise.
+  '''
+  string = ''
+
+  for i in range(len(data)):
+    line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_core_focus(data[i])} for {data[i]['Rep_num'].to_string(index=False)} {data[i]['Unit'].to_string(index=False)}")
+    string += line + '\n' + '\n'
+  
+  string += str('---------')
+
+  return string
