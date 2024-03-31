@@ -42,6 +42,8 @@ There will always be a balance exercise during every core split session. This ex
 
 An core split will always have the order `[abs, obliques, abs, lower back & balance]`. There is no option to shuffle a core split, and is not needed in the first place.
 
+The intensity of a core split will alternate between each exercise.
+
 
 ## main.py Info
 The main.py script is meant to be ran in the command line. 
@@ -54,5 +56,5 @@ Parameters:
 
 Example Commands:
 1. `python3 main.py upper` (generates a shuffled upper split without any instructions)
-2. `python3 main.py upper yes yes yes` (generates a shuffled upper split without all instructions)
+2. `python3 main.py upper yes yes yes` (generates a shuffled upper split with all instructions)
 3. `python3 main.py upper no yes no` (generates a unshuffled upper split with only main set instructions)
