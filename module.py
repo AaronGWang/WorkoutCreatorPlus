@@ -25,7 +25,7 @@ def create_unique_dataframes(df: pd.DataFrame):
 
 def choose_exercise(area_df: pd.DataFrame, area_df_list: list):
   '''
-  This function chooses random exercises from the arms dataframe.
+  This function chooses random exercises from the dataframe.
   
   Args:
     area_df (pd.DataFrame): The dataframe for the area.
@@ -59,7 +59,6 @@ def generate_upper_split(area_1_dataframe: pd.DataFrame,
   Returns:
     upper_split (list): A list of ordered upper body exercises in this order: [Biceps, Triceps, Shoulders, Back, Chest, Compound].
   '''
-
   upper_split = []
 
   arms_dataframe_list = create_unique_dataframes(df=area_1_dataframe)
@@ -92,7 +91,6 @@ def generate_lower_split(area_3_dataframe: pd.DataFrame, compound_dataframe: pd.
   Returns:
     lower_split (list): A list of ordered lower body exercises in this order: [Quands, Calves, Glutes, Hamstrings, Compound].
   '''
-
   lower_split = []
 
   leg_dataframe_list = create_unique_dataframes(df=area_3_dataframe)
@@ -119,7 +117,6 @@ def generate_core_split(core_dataframe: pd.DataFrame):
   Returns:
     core_split (list): A list of ordered core exercises in this order: [Abs, Obliques, Abs, LB & Balance], intensity alternates between exercises.
   '''
-
   core_split = []
 
   intensity_values = list(core_dataframe['Intensity'].unique())
@@ -163,7 +160,7 @@ def generate_main_set_focus(upper_data: pd.DataFrame):
     upper_data (pd.DataFrame): The upper body data, including weight, rep_num & RIR
 
   Returns:
-    focus (str): The focus of the workout.
+    focus (str): The focus of the workout, including info about weight, rep_num & RIR.
   '''
   if upper_data['Weight'].item() == 0:
     weight = 'low weight'
@@ -187,21 +184,29 @@ def generate_main_set_focus(upper_data: pd.DataFrame):
   return f"Focus on {weight} for {rep_num}, {RIR}"
 
 
-def print_main_set(data: list):
+def print_main_set(data: list, split: str, instructions: str):
   '''
   This function prints the set based on the data.
 
   Args:
     data (list): The data to be printed.
+    split (str): The split type.
+    instructions (str): Whether or not to include instructions. Either 'yes' or 'no'.
 
   Returns:
     workout (str): organized lines of text about every exercise.
   '''
-  string = str('---------\n\n')
-
-  for i in range(len(data)):
-    line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_main_set_focus(data[i])}")
-    string += line + '\n' + '\n'
+  pd.set_option('display.max_colwidth', None)
+  string = str(f'{split.upper()} Split:\n---------\n\n')
+  
+  if instructions == 'no':
+    for i in range(len(data)):
+      line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_main_set_focus(data[i])}")
+      string += line + '\n' + '\n'
+  else:
+    for i in range(len(data)):
+      line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_main_set_focus(data[i])} | Instructions: {data[i]['Instructions'].to_string(index=False)}")
+      string += line + '\n' + '\n'
 
   string += str('---------')
 
@@ -216,7 +221,7 @@ def generate_core_focus(core_data: pd.DataFrame):
     core_data (pd.DataFrame): The core data, including weight, rep_num & RIR
 
   Returns:
-    focus (str): The focus of the workout.
+    focus (str): The focus of the workout, including info about weight, rep_num, and units.
   '''
   if core_data['Weight'].item() == 0:
     weight = 'low weight'
@@ -233,22 +238,61 @@ def generate_core_focus(core_data: pd.DataFrame):
   return f"This is a {intensity} exercise. Focus on {weight}"
 
 
-def print_core_set(data: list):
+def print_core_set(data: list, instructions: str):
   '''
   This function prints the core set based on the data.
 
   Args:
     data (list): The data to be printed.
+    instructions (str): Whether or not to include instructions. Either 'yes' or 'no'.
 
   Returns:
     workout (str): organized lines of text about every exercise.
   '''
-  string = ''
-
-  for i in range(len(data)):
-    line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_core_focus(data[i])} for {data[i]['Rep_num'].to_string(index=False)} {data[i]['Unit'].to_string(index=False)}")
-    string += line + '\n' + '\n'
+  pd.set_option('display.max_colwidth', None)
+  string = 'CORE Split:\n---------\n\n'
+  
+  if instructions == 'no':
+    for i in range(len(data)):
+      line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_core_focus(data[i])} for {data[i]['Rep_num'].to_string(index=False)} {data[i]['Unit'].to_string(index=False)}")
+      string += line + '\n' + '\n'
+  else:
+      for i in range(len(data)):
+        line = str(f"Exercise: {data[i]['Name'].to_string(index=False)} | Area: {data[i]['Area'].to_string(index=False)} | {generate_core_focus(data[i])} for {data[i]['Rep_num'].to_string(index=False)} {data[i]['Unit'].to_string(index=False)} | Instructions: {data[i]['Instructions'].to_string(index=False)}")
+        string += line + '\n' + '\n'
   
   string += str('---------')
+
+  return string
+
+
+def check_status(split_type: str, shuffle: str, main_instructions: str, core_instructions: str):
+  '''
+  This function checks the status of the shuffle, main_instructions, and core_instructions.
+
+  Args:
+    split_type (str): The type of workout split to generate. Must be either "upper" or "lower".
+    shuffle (str): The shuffle status. Either 'yes' or 'no'.
+    main_instructions (str): The main instructions status. Either 'yes' or 'no'.
+    core_instructions (str): The core instructions status. Either 'yes' or 'no'.
+
+  Returns:
+    string (str): A message indicating that the workout split has been copied to the clipboard with info about the shuffling, instructions, and split type.
+  '''
+  if shuffle.lower() == 'yes':
+    shuffle_status = ' shuffled '
+  else:
+    shuffle_status = ' '
+
+  if (main_instructions.lower() == 'yes' and core_instructions.lower() == 'yes'):
+    instructions_status = ' with main set and core set instructions '
+  elif (main_instructions.lower() == 'yes' and core_instructions.lower() == 'no'):
+    instructions_status = ' with main set instructions '
+  elif (main_instructions.lower() == 'no' and core_instructions.lower() == 'yes'):
+    instructions_status = ' with core set instructions '
+  else:
+    instructions_status = ' '
+
+  string = f'A{shuffle_status}{split_type} body workout{instructions_status}been copied to clipboard.'
 
   return string
