@@ -1,6 +1,7 @@
 # WorkoutCreatorPlus
 This repo includes a script (main.py) that can generate a upper/lower split workout schedule. The script can be ran once before every workout session to generate a workout plan. 
 
+
 ## General Schedule Format
 Two types of sessions:
 - Upper Split: 
@@ -13,6 +14,7 @@ Two types of sessions:
   * The main set includes most areas of the upper body `(quads, calves, glutes, hamstrings, compound)`.
   * The core set includes most areas of the core `(Abs, Obliques, Lower Back)`
 
+
 ## Upper Split
 The upper split is a upper body session that takes around 45 minutes to complete.
 
@@ -20,7 +22,7 @@ This session has `6 exercises` and should be completed for `3-4 sets`.
 
 There will always be a compound exercise during every upper split session. This exercise involves multiple muscle groups.
 
-An unshuffled upper split will always have the order `[biceps, triceps, back, shoulders, chest]`. A shuffled upper split will have a random order.
+An unshuffled upper split will always have the order `[biceps, triceps, back, shoulders, chest, compound]`. A shuffled upper split will have a random order.
 
 
 ## Lower Split
