@@ -38,7 +38,7 @@ def main(split_type: str, shuffle: str='yes', main_instructions: str='no', core_
     core_data = generate_core_split(core_dataframe=df_5)
 
     # Shuffle / no shuffle
-    if shuffle == True:
+    if shuffle == 'yes':
       random.shuffle(upper_data)
     else:
       None
@@ -66,7 +66,7 @@ def main(split_type: str, shuffle: str='yes', main_instructions: str='no', core_
     core_data = generate_core_split(core_dataframe=df_5)
 
     # Shuffle / no shuffle
-    if shuffle:
+    if shuffle == 'yes':
       random.shuffle(lower_data)
     else:
       None
